@@ -1,0 +1,34 @@
+// SOCKET
+
+// Apertura Socket (client)
+
+	Socket s = new Socket("localhost", 9999);
+
+// Apertura ServerSocket (server)
+
+	ServerSocket ss = new ServerSocket(9999);
+	while(true){
+		Socket s=ss.accept();
+		.....istruzioni
+	}
+		
+// Ricevere testo
+
+	InputStreamReader isr = new InputStreamReader(s.getInputStream());
+	BufferedReader in = new BufferedReader(isr);
+	System.out.println("Il server riceve:" + in.readLine());
+	
+	
+	
+// Inviare testo
+
+	PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+	out.println(" Ciaone dal serverone!");
+	
+
+// Ricevere numeri
+	s.getInputStream().read();
+
+// Inviare numeri
+	s.getOutputStream().write(numerodainviare);	
+	
