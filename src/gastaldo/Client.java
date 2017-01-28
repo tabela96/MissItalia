@@ -65,6 +65,7 @@ public class Client {
 		btnLista.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				list.removeAll();
 				try {
 					s=new Socket("localhost", 9999);
 					InputStreamReader isr=new InputStreamReader(s.getInputStream());
@@ -82,7 +83,23 @@ public class Client {
 		});
 		btnLista.setBounds(214, 10, 75, 25);
 		btnLista.setText("Lista");
+		
+		Button btnVota = new Button(shell, SWT.NONE);
+		btnVota.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				int votato;
+				votato=list.getSelectionIndex();
+				try {
+					s.getOutputStream().write(votato);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnVota.setBounds(214, 55, 75, 25);
+		btnVota.setText("Vota");
 
 	}
-	
 }
