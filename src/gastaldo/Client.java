@@ -4,16 +4,21 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.List;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class Client {
 
 	protected Shell shell;
+	private Socket s;
 
 	/**
 	 * Launch the application.
@@ -38,7 +43,6 @@ public class Client {
 		createContents();
 		shell.open();
 		shell.layout();
-		avvia();
 		while (!shell.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -58,12 +62,24 @@ public class Client {
 		list.setBounds(10, 10, 162, 202);
 		
 		Button btnLista = new Button(shell, SWT.NONE);
+		btnLista.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					s=new Socket("localhost", 9999);
+					InputStreamReader isr=new InputStreamReader(s.getInputStream());
+					BufferedReader in=new BufferedReader(isr);
+					//for(int i=0;i<)
+					list.add(in.readLine());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnLista.setBounds(214, 10, 75, 25);
 		btnLista.setText("Lista");
 
 	}
 	
-	public void avvia() throws UnknownHostException, IOException{
-		Socket s=new Socket("localhost", 9999);
-	}
 }
