@@ -14,14 +14,13 @@ public class Server {
 		lista.add("Borto");
 		lista.add("Nardi");
 		lista.add("Gastaldo");
-		String fine="FINE";
 		while(true){
 			Socket s=ss.accept();
 			PrintWriter out=new PrintWriter(s.getOutputStream(), true);
-			out.println(fine);
 			for(int i=0;i<lista.size();i++){
 				out.println(lista.get(i));
 			}
+			out.println("FINE");
 		}
 	}
 }

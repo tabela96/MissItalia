@@ -69,8 +69,11 @@ public class Client {
 					s=new Socket("localhost", 9999);
 					InputStreamReader isr=new InputStreamReader(s.getInputStream());
 					BufferedReader in=new BufferedReader(isr);
-					//for(int i=0;i<)
-					list.add(in.readLine());
+					String fine=in.readLine();
+					while(!fine.equals("FINE")){
+						list.add(fine);
+						fine=in.readLine();
+					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
